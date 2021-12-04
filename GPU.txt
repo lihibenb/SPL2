@@ -16,12 +16,12 @@ public class GPU {
     private Cluster cluster;
     private Type type;
     private Model model;
-    private MessageBusImpl messageBus;
+    //private MessageBusImpl messageBus;
 
-    public GPU(Type type, Cluster cluster, MessageBusImpl messageBus){
+    public GPU(Type type, Cluster cluster){             //, MessageBusImpl messageBus){
         this.type = type;
         this.cluster = cluster;
-        this.messageBus = messageBus;
+        //this.messageBus = messageBus;
         this.model = null;
     }
 
