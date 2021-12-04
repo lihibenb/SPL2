@@ -1,0 +1,55 @@
+package bgu.spl.mics.application.objects;
+
+import bgu.spl.mics.Event;
+import bgu.spl.mics.MessageBusImpl;
+import bgu.spl.mics.MicroService;
+import bgu.spl.mics.example.messages.ExampleEvent;
+import bgu.spl.mics.example.services.ExampleEventHandlerService;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+
+public class GPUTest {
+    Cluster cluster = new Cluster();
+    Model model = new Model();
+    Event<String> event = new ExampleEvent("Room1");
+    GPU testModelGPU;
+    GPU trainModelGPU;
+    MessageBusImpl messageBus;
+    @Test
+    public void testModelEvent() {
+        model.setStatus(Model.statusList.Trained);
+        testModelGPU = new GPU(GPU.Type.GTX1080, cluster, messageBus, model);
+
+        //the prob of only "Bad" < 8*10^-8
+        boolean Bad = false;
+        boolean Good = false;
+        for (int i = 0; i < 100 & !(Bad || Good); i++) {
+            testModelGPU.TestModelEvent();
+            if(model.getResult() == Model.resultsList.Bad)
+                Bad = true;
+            if(model.getResult() == Model.resultsList.Good)
+                Good = true;
+        }
+        assertTrue(Bad & Good);
+    }
+
+    @Test
+    public void trainModelEvent() {
+    }
+
+    @Test
+    public void publishResultsEvent() {
+    }
+
+    @Test
+    public void publishConferenceBroadcast() {
+    }
+
+    @Test
+    public void tickBroadcast() {
+    }
+
+
+}
