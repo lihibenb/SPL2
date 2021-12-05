@@ -23,6 +23,11 @@ public class GPUTest {
         testModelGPU = new GPU(GPU.Type.GTX1080, cluster, messageBus, model);
         
         boolean changed, tested;
+        /*
+        *if the result model could change from NONE to Good/Bad then it's doesn't matter to whon since it
+        *happend in the same way
+        */
+        
         changed = (model.getResult() == Model.resultsList.Bad || model.getResult() == Model.resultsList.Good);
         tested = (model.getStatus() == Model.statusList.Tested);
         assertTrue(changed == tested && tested == true);
