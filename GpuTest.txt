@@ -21,18 +21,12 @@ public class GPUTest {
     public void testModelEvent() {
         model.setStatus(Model.statusList.Trained);
         testModelGPU = new GPU(GPU.Type.GTX1080, cluster, messageBus, model);
+        
+        boolean changed, tested;
+        changed = (model.getResult() == Model.resultsList.Bad || model.getResult() == Model.resultsList.Good);
+        tested = (model.getStatus() == Model.statusList.Tested);
+        assertTrue(changed == tested && tested == true);
 
-        //the prob of only "Bad" < 8*10^-8
-        boolean Bad = false;
-        boolean Good = false;
-        for (int i = 0; i < 100 & !(Bad || Good); i++) {
-            testModelGPU.TestModelEvent();
-            if(model.getResult() == Model.resultsList.Bad)
-                Bad = true;
-            if(model.getResult() == Model.resultsList.Good)
-                Good = true;
-        }
-        assertTrue(Bad & Good);
     }
 
     @Test
