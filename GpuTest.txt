@@ -20,7 +20,7 @@ public class GPUTest {
     @Test
     public void testModelEvent() {
         model.setStatus(Model.statusList.Trained);
-        testModelGPU = new GPU(GPU.Type.GTX1080, cluster, messageBus, model);
+        testModelGPU = new GPU(GPU.Type.GTX1080, cluster, model);
         
         boolean changed, tested;
         /*
